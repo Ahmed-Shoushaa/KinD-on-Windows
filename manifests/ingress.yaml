@@ -1,0 +1,21 @@
+# kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: juice-shop-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: internal-juice-shop-service
+            port:
+              number: 8080
+
+# server accessible through http://localhost:8080/
+
+
+#docker run --add-host test.kind-cluster.com:172.18.0.3 --net kind --rm curlimages/curl:7.71.0 test.kind-cluster.com
